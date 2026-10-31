@@ -1,0 +1,215 @@
+/*
+ * Generated file - do not edit by hand.
+ * Source: task-01-design-system/tokens/design-tokens.json
+ */
+
+:root {
+  /* -------------------------------------------------------------------------
+   * Primitives (Palette tones, 6-digit hex)
+   * ------------------------------------------------------------------------- */
+  --primitive-error-0: #000000;
+  --primitive-error-10: #410001;
+  --primitive-error-100: #ffffff;
+  --primitive-error-20: #690004;
+  --primitive-error-30: #930009;
+  --primitive-error-40: #ba1a1a;
+  --primitive-error-50: #de3730;
+  --primitive-error-60: #ff5449;
+  --primitive-error-70: #ff897d;
+  --primitive-error-80: #ffb4ab;
+  --primitive-error-90: #ffdad5;
+  --primitive-error-95: #ffedea;
+  --primitive-error-98: #fff8f7;
+  --primitive-error-99: #fff9f8;
+  --primitive-neutral-0: #000000;
+  --primitive-neutral-10: #1b1b1f;
+  --primitive-neutral-100: #ffffff;
+  --primitive-neutral-20: #303034;
+  --primitive-neutral-30: #47464a;
+  --primitive-neutral-40: #5f5e62;
+  --primitive-neutral-50: #78767a;
+  --primitive-neutral-60: #929094;
+  --primitive-neutral-70: #adaaaf;
+  --primitive-neutral-80: #c8c5ca;
+  --primitive-neutral-90: #e5e1e6;
+  --primitive-neutral-95: #f3eff4;
+  --primitive-neutral-98: #fcf8fd;
+  --primitive-neutral-99: #fffbfc;
+  --primitive-neutral-variant-0: #000000;
+  --primitive-neutral-variant-10: #191a2c;
+  --primitive-neutral-variant-100: #ffffff;
+  --primitive-neutral-variant-20: #2e2f42;
+  --primitive-neutral-variant-30: #444559;
+  --primitive-neutral-variant-40: #5c5d72;
+  --primitive-neutral-variant-50: #75758b;
+  --primitive-neutral-variant-60: #8f8fa6;
+  --primitive-neutral-variant-70: #aaa9c1;
+  --primitive-neutral-variant-80: #c5c4dd;
+  --primitive-neutral-variant-90: #e1e0f9;
+  --primitive-neutral-variant-95: #f1efff;
+  --primitive-neutral-variant-98: #fbf8ff;
+  --primitive-neutral-variant-99: #fffbfd;
+  --primitive-primary-0: #000000;
+  --primitive-primary-10: #00006f;
+  --primitive-primary-100: #ffffff;
+  --primitive-primary-20: #0100ac;
+  --primitive-primary-30: #1519e0;
+  --primitive-primary-40: #3941f6;
+  --primitive-primary-50: #5a63ff;
+  --primitive-primary-60: #7c84ff;
+  --primitive-primary-70: #9da3ff;
+  --primitive-primary-80: #bfc2ff;
+  --primitive-primary-90: #e0e0ff;
+  --primitive-primary-95: #f1efff;
+  --primitive-primary-98: #fbf8ff;
+  --primitive-primary-99: #fffbff;
+  --primitive-secondary-0: #000000;
+  --primitive-secondary-10: #231b00;
+  --primitive-secondary-100: #ffffff;
+  --primitive-secondary-20: #3b2f00;
+  --primitive-secondary-30: #554500;
+  --primitive-secondary-40: #715d00;
+  --primitive-secondary-50: #8d7500;
+  --primitive-secondary-60: #ab8e00;
+  --primitive-secondary-70: #caa800;
+  --primitive-secondary-80: #eac311;
+  --primitive-secondary-90: #ffe175;
+  --primitive-secondary-95: #fff0c5;
+  --primitive-secondary-98: #fff8ef;
+  --primitive-secondary-99: #fffaf7;
+  --primitive-tertiary-0: #000000;
+  --primitive-tertiary-10: #002201;
+  --primitive-tertiary-100: #ffffff;
+  --primitive-tertiary-20: #003a03;
+  --primitive-tertiary-30: #005306;
+  --primitive-tertiary-40: #006e0c;
+  --primitive-tertiary-50: #208920;
+  --primitive-tertiary-60: #3fa539;
+  --primitive-tertiary-70: #5bc051;
+  --primitive-tertiary-80: #77dd6a;
+  --primitive-tertiary-90: #92fa83;
+  --primitive-tertiary-95: #caffbb;
+  --primitive-tertiary-98: #ecffe2;
+  --primitive-tertiary-99: #fdfcf7;
+  --primitive-warning-0: #000000;
+  --primitive-warning-10: #2f1400;
+  --primitive-warning-100: #ffffff;
+  --primitive-warning-20: #4d2600;
+  --primitive-warning-30: #6e3900;
+  --primitive-warning-40: #914d00;
+  --primitive-warning-50: #b56100;
+  --primitive-warning-60: #da7700;
+  --primitive-warning-70: #ff8e14;
+  --primitive-warning-80: #ffb77d;
+  --primitive-warning-90: #ffdcc3;
+  --primitive-warning-95: #ffede3;
+  --primitive-warning-98: #fff8f5;
+  --primitive-warning-99: #fff9f7;
+
+  /* -------------------------------------------------------------------------
+   * Colour Roles (Light mode MVP)
+   * ------------------------------------------------------------------------- */
+  --color-primary: var(--primitive-primary-40);
+  --color-on-primary: var(--primitive-primary-100);
+  --color-primary-container: var(--primitive-primary-90);
+  --color-on-primary-container: var(--primitive-primary-10);
+  --color-secondary: var(--primitive-secondary-40);
+  --color-on-secondary: var(--primitive-secondary-100);
+  --color-error: var(--primitive-error-40);
+  --color-on-error: var(--primitive-error-100);
+  --color-error-container: var(--primitive-error-90);
+  --color-on-error-container: var(--primitive-error-30);
+  --color-success: var(--primitive-tertiary-40);
+  --color-on-success: var(--primitive-tertiary-100);
+  --color-warning: var(--primitive-warning-40);
+  --color-on-warning: var(--primitive-warning-100);
+  --color-surface: var(--primitive-neutral-98);
+  --color-on-surface: var(--primitive-neutral-10);
+  --color-surface-variant: var(--primitive-neutral-variant-90);
+  --color-on-surface-variant: var(--primitive-neutral-variant-30);
+  --color-surface-container: var(--primitive-neutral-95);
+  --color-outline: var(--primitive-neutral-variant-50);
+  --color-outline-variant: var(--primitive-neutral-variant-80);
+  --color-inverse-surface: var(--primitive-neutral-20);
+  --color-inverse-on-surface: var(--primitive-neutral-95);
+
+  /* -------------------------------------------------------------------------
+   * Typography (Font family, type styles)
+   * ------------------------------------------------------------------------- */
+  --font-family-base: 'Inter', sans-serif;
+  --type-h1-headline-size: 3rem;
+  --type-h1-headline-line: 4.25rem;
+  --type-h1-headline-weight: 600;
+  --type-h1-headline-spacing: 0px;
+  --type-h2-size: 2.5rem;
+  --type-h2-line: 3.5rem;
+  --type-h2-weight: 600;
+  --type-h2-spacing: 0px;
+  --type-h3-size: 2rem;
+  --type-h3-line: 3rem;
+  --type-h3-weight: 600;
+  --type-h3-spacing: 0px;
+  --type-h4-size: 1.75rem;
+  --type-h4-line: 2.5rem;
+  --type-h4-weight: 600;
+  --type-h4-spacing: 0px;
+  --type-h5-size: 1.5rem;
+  --type-h5-line: 2.25rem;
+  --type-h5-weight: 600;
+  --type-h5-spacing: 0px;
+  --type-b1-size: 1rem;
+  --type-b1-line: 1.5rem;
+  --type-b1-weight: 400;
+  --type-b1-spacing: 0.5px;
+  --type-b2-size: 1rem;
+  --type-b2-line: 1.5rem;
+  --type-b2-weight: 500;
+  --type-b2-spacing: 0px;
+  --type-b3-size: 0.875rem;
+  --type-b3-line: 1.25rem;
+  --type-b3-weight: 400;
+  --type-b3-spacing: 0.25px;
+  --type-b4-size: 0.75rem;
+  --type-b4-line: 1rem;
+  --type-b4-weight: 500;
+  --type-b4-spacing: 0.4px;
+  --type-c1-size: 0.75rem;
+  --type-c1-line: 1.125rem;
+  --type-c1-weight: 400;
+  --type-c1-spacing: 0px;
+  --type-c2-size: 0.75rem;
+  --type-c2-line: 1.125rem;
+  --type-c2-weight: 500;
+  --type-c2-spacing: 0px;
+  --type-c3-size: 0.625rem;
+  --type-c3-line: 0.875rem;
+  --type-c3-weight: 500;
+  --type-c3-spacing: 0px;
+  --type-l1-size: 0.75rem;
+  --type-l1-line: 1rem;
+  --type-l1-weight: 500;
+  --type-l1-spacing: 0px;
+  --type-bt-1-size: 1.125rem;
+  --type-bt-1-line: 1.5rem;
+  --type-bt-1-weight: 600;
+  --type-bt-1-spacing: 0px;
+  --type-bt-2-size: 1rem;
+  --type-bt-2-line: 1.25rem;
+  --type-bt-2-weight: 600;
+  --type-bt-2-spacing: 0px;
+  --type-bt-3-size: 0.875rem;
+  --type-bt-3-line: 1rem;
+  --type-bt-3-weight: 600;
+  --type-bt-3-spacing: 0px;
+  --type-bt-4-size: 0.75rem;
+  --type-bt-4-line: 1rem;
+  --type-bt-4-weight: 600;
+  --type-bt-4-spacing: 0px;
+
+  /* -------------------------------------------------------------------------
+   * Effects (Box shadows)
+   * ------------------------------------------------------------------------- */
+  --shadow-soft: 0 1px 3px 1px #00000026, 0 1px 2px 0 #0000004d;
+  --shadow-medium: 0 1px 3px 0 #0000004d, 0 4px 8px 3px #00000026;
+  --shadow-hard: 0 4px 4px 0 #0000004d, 0 8px 12px 6px #00000026;
+}

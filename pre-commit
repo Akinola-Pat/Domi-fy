@@ -1,0 +1,46 @@
+#!/bin/sh
+# Domi-fy pre-commit secret scan.
+# Enable once per clone:   git config core.hooksPath .githooks
+# Make it runnable (Mac/Linux):   chmod +x .githooks/pre-commit
+#
+# It blocks a commit when a staged file is a real env file, or when a staged
+# file contains something shaped like a secret. It prints file names only,
+# never the secret itself.
+# Limits: it checks future commits only, and it cannot catch every secret.
+
+staged=$(git -c core.quotepath=off diff --cached --name-only --diff-filter=ACM)
+[ -z "$staged" ] && exit 0
+
+# Placeholder values that are allowed to look like secrets.
+allow='username:password|user:pass|your_|<[a-z_]+>|replace_me|changeme'
+
+pattern='sk_live_[A-Za-z0-9]+|pk_live_[A-Za-z0-9]+|sk_test_[A-Za-z0-9]{16,}|(postgres|postgresql|mysql)://[^[:space:]:@/]+:[^[:space:]@]+@|-----BEGIN [A-Z ]*PRIVATE KEY-----|(SECRET|TOKEN|PASSWORD|API_KEY)[A-Z_]*[[:space:]]*=[[:space:]]*["'"'"']?[A-Za-z0-9/+_-]{16,}'
+
+blocked=""
+
+while IFS= read -r f; do
+  # 1. Real env files are never committed. .env.example is allowed.
+  case "$f" in
+    .env.example|*/.env.example) continue ;;
+    .env|.env.*|*/.env|*/.env.*)
+      blocked="$blocked
+  env file staged: $f"
+      continue ;;
+  esac
+  # 2. Secret-shaped text inside the staged version of the file.
+  if git show ":$f" 2>/dev/null | grep -IE "$pattern" | grep -ivE "$allow" | grep -q .; then
+    blocked="$blocked
+  secret-shaped text in: $f"
+  fi
+done <<EOF
+$staged
+EOF
+
+if [ -n "$blocked" ]; then
+  echo "COMMIT BLOCKED by .githooks/pre-commit:$blocked"
+  echo ""
+  echo "Remove the secret, unstage the file (git restore --staged <file>), and use an environment variable instead."
+  echo "A secret that reaches git history counts as leaked even if you delete it later."
+  exit 1
+fi
+exit 0
