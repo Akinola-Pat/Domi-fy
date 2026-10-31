@@ -1,0 +1,371 @@
+/* -----------------------------------------------------------------------------
+ * screen.css
+ * Landlord Dashboard built strictly with Domi-fy design system tokens.
+ *
+ * Rules:
+ * 1. Zero hardcoded hex, rgb, hsl, font sizes, line heights, letter spacings, or shadows.
+ * 2. Role variables (--color-*) only. No --primitive-* variables.
+ * 3. Text properties use --font-family-base and --type-* tokens.
+ * 4. Cards use --shadow-* tokens. Status chips use role pairs.
+ * 5. Spacing and radii custom properties declared in rem below.
+ * -------------------------------------------------------------------------- */
+
+:root {
+  /* Spacing Scale (Rule 5 Assumption - in rem) */
+  --space-2xs: 0.125rem;   /* 2px */
+  --space-xs: 0.25rem;     /* 4px */
+  --space-sm: 0.5rem;      /* 8px */
+  --space-md: 0.75rem;     /* 12px */
+  --space-lg: 1rem;        /* 16px */
+  --space-xl: 1.25rem;     /* 20px */
+  --space-2xl: 1.5rem;     /* 24px */
+  --space-3xl: 2rem;       /* 32px */
+  --space-4xl: 2.5rem;     /* 40px */
+  --space-max-width: 65rem; /* 1040px max content width */
+
+  /* Corner Radii Scale (Rule 5 Assumption - in rem) */
+  --radius-xs: 0.125rem;   /* 2px */
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-pill: 99rem;    /* pill chips */
+}
+
+/* -----------------------------------------------------------------------------
+ * Reset & Base
+ * -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-surface-container);
+  color: var(--color-on-surface);
+  font-family: var(--font-family-base);
+  font-size: var(--type-b1-size);
+  line-height: var(--type-b1-line);
+  font-weight: var(--type-b1-weight);
+  letter-spacing: var(--type-b1-spacing);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* -----------------------------------------------------------------------------
+ * Top Bar
+ * -------------------------------------------------------------------------- */
+.top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-outline-variant);
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.top-bar-inner {
+  max-width: var(--space-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-family: var(--font-family-base);
+  font-size: var(--type-h5-size);
+  line-height: var(--type-h5-line);
+  font-weight: var(--type-h5-weight);
+  letter-spacing: var(--type-h5-spacing);
+  color: var(--color-primary);
+}
+
+.landlord-name {
+  font-family: var(--font-family-base);
+  font-size: var(--type-b3-size);
+  line-height: var(--type-b3-line);
+  font-weight: var(--type-b2-weight);
+  letter-spacing: var(--type-b3-spacing);
+  color: var(--color-on-surface-variant);
+}
+
+/* -----------------------------------------------------------------------------
+ * Main Container
+ * -------------------------------------------------------------------------- */
+.container {
+  max-width: var(--space-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--space-2xl) var(--space-lg) var(--space-4xl);
+}
+
+.page-title {
+  font-family: var(--font-family-base);
+  font-size: var(--type-h3-size);
+  line-height: var(--type-h3-line);
+  font-weight: var(--type-h3-weight);
+  letter-spacing: var(--type-h3-spacing);
+  color: var(--color-on-surface);
+  margin-bottom: var(--space-xl);
+}
+
+/* -----------------------------------------------------------------------------
+ * Summary Cards
+ * -------------------------------------------------------------------------- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-3xl);
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-label {
+  font-family: var(--font-family-base);
+  font-size: var(--type-c1-size);
+  line-height: var(--type-c1-line);
+  font-weight: var(--type-c2-weight);
+  letter-spacing: var(--type-c1-spacing);
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.card-value {
+  font-family: var(--font-family-base);
+  font-size: var(--type-h4-size);
+  line-height: var(--type-h4-line);
+  font-weight: var(--type-h4-weight);
+  letter-spacing: var(--type-h4-spacing);
+  color: var(--color-on-surface);
+}
+
+/* -----------------------------------------------------------------------------
+ * Units Section
+ * -------------------------------------------------------------------------- */
+.section-title {
+  font-family: var(--font-family-base);
+  font-size: var(--type-bt-1-size);
+  line-height: var(--type-bt-1-line);
+  font-weight: var(--type-bt-1-weight);
+  letter-spacing: var(--type-bt-1-spacing);
+  color: var(--color-on-surface);
+  margin-bottom: var(--space-lg);
+}
+
+.units-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.unit-row {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.unit-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.unit-name {
+  font-family: var(--font-family-base);
+  font-size: var(--type-b2-size);
+  line-height: var(--type-b2-line);
+  font-weight: var(--type-b2-weight);
+  letter-spacing: var(--type-b2-spacing);
+  color: var(--color-on-surface);
+}
+
+.unit-tenant {
+  font-family: var(--font-family-base);
+  font-size: var(--type-b3-size);
+  line-height: var(--type-b3-line);
+  font-weight: var(--type-b1-weight);
+  letter-spacing: var(--type-b3-spacing);
+  color: var(--color-on-surface-variant);
+  margin-top: var(--space-2xs);
+}
+
+.unit-financials {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.unit-amount {
+  font-family: var(--font-family-base);
+  font-size: var(--type-b2-size);
+  line-height: var(--type-b2-line);
+  font-weight: var(--type-b2-weight);
+  letter-spacing: var(--type-b2-spacing);
+  color: var(--color-on-surface);
+}
+
+/* -----------------------------------------------------------------------------
+ * Status Chips
+ * -------------------------------------------------------------------------- */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-family-base);
+  font-size: var(--type-c2-size);
+  line-height: var(--type-c2-line);
+  font-weight: var(--type-c2-weight);
+  letter-spacing: var(--type-c2-spacing);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.status-paid {
+  background-color: var(--color-success);
+  color: var(--color-on-success);
+}
+
+.status-due {
+  background-color: var(--color-warning);
+  color: var(--color-on-warning);
+}
+
+.status-overdue {
+  background-color: var(--color-error);
+  color: var(--color-on-error);
+}
+
+/* -----------------------------------------------------------------------------
+ * Actions Group
+ * -------------------------------------------------------------------------- */
+.actions-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: stretch;
+  margin-bottom: var(--space-xl);
+}
+
+.btn-primary {
+  display: inline-block;
+  text-align: center;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-family-base);
+  font-size: var(--type-bt-2-size);
+  line-height: var(--type-bt-2-line);
+  font-weight: var(--type-bt-2-weight);
+  letter-spacing: var(--type-bt-2-spacing);
+  padding: var(--space-md) var(--space-2xl);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--color-on-primary-container);
+  color: var(--color-primary-container);
+}
+
+.link-receipts {
+  display: inline-block;
+  text-align: center;
+  font-family: var(--font-family-base);
+  font-size: var(--type-b3-size);
+  line-height: var(--type-b3-line);
+  font-weight: var(--type-b2-weight);
+  letter-spacing: var(--type-b3-spacing);
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+}
+
+.link-receipts:hover,
+.link-receipts:focus {
+  text-decoration: underline;
+  color: var(--color-on-primary-container);
+}
+
+/* -----------------------------------------------------------------------------
+ * Caption
+ * -------------------------------------------------------------------------- */
+.caption-updated {
+  font-family: var(--font-family-base);
+  font-size: var(--type-c1-size);
+  line-height: var(--type-c1-line);
+  font-weight: var(--type-c1-weight);
+  letter-spacing: var(--type-c1-spacing);
+  color: var(--color-on-surface-variant);
+  text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Desktop Breakpoint (1440px / min-width: 48rem)
+ * -------------------------------------------------------------------------- */
+@media (min-width: 48rem) {
+  .container {
+    padding: var(--space-3xl) var(--space-xl) var(--space-4xl);
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .card {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .unit-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg) var(--space-2xl);
+  }
+
+  .unit-info {
+    flex: 1;
+  }
+
+  .unit-financials {
+    flex: 1;
+    justify-content: flex-end;
+    gap: var(--space-3xl);
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .actions-group {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .btn-primary {
+    width: auto;
+  }
+
+  .link-receipts {
+    text-align: left;
+  }
+
+  .caption-updated {
+    text-align: left;
+  }
+}
+
