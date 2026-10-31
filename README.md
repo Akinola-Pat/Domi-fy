@@ -8,7 +8,7 @@ This repository holds five tasks as five top-level folders (one repository, five
 
 ## 2. Status
 
-Honest status as of 30 October 2026:
+Honest status as of 31 October 2026:
 
 - Finished: product requirements document (`context/PRD.md`), agent rules (`AGENTS.md`), design system context (`context/design-system.md`).
 - Half done: Task 1. The design system exists in Figma and is exported to `task-01-design-system/tokens/design-tokens.json`. The agent conversion to CSS, the screen built with the system, the evidence and the written documents are not done.
