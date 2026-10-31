@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio overview | Domi-fy</title>
+  <style>
+    /* Reset & Box-Sizing */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 20px;
+    }
+
+    .top-bar-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e3a8a;
+      letter-spacing: -0.5px;
+    }
+
+    .landlord-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    /* Page Heading */
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .card-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748b;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Units Section */
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 16px;
+    }
+
+    .units-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .unit-row {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .unit-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .unit-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .unit-tenant {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .unit-financials {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 8px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .unit-amount {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    /* Status Chips */
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .status-paid {
+      background-color: #ecfdf5;
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
+
+    .status-due {
+      background-color: #fffbeb;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+
+    .status-overdue {
+      background-color: #fef2f2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    /* Actions */
+    .actions-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      text-align: center;
+      background-color: #1e3a8a;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #172554;
+    }
+
+    .link-receipts {
+      display: inline-block;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1e3a8a;
+      text-decoration: none;
+      padding: 8px 12px;
+    }
+
+    .link-receipts:hover {
+      text-decoration: underline;
+      color: #172554;
+    }
+
+    /* Caption */
+    .caption-updated {
+      font-size: 12px;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    /* Desktop Viewport (1440px / min-width: 768px) */
+    @media (min-width: 768px) {
+      .container {
+        padding: 36px 24px 60px;
+      }
+
+      .page-title {
+        font-size: 28px;
+        margin-bottom: 24px;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .card {
+        padding: 22px 24px;
+      }
+
+      .card-value {
+        font-size: 26px;
+      }
+
+      .unit-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 24px;
+      }
+
+      .unit-info {
+        flex: 1;
+      }
+
+      .unit-financials {
+        flex: 1;
+        justify-content: flex-end;
+        gap: 32px;
+        padding-top: 0;
+        border-top: none;
+      }
+
+      .unit-amount {
+        font-size: 16px;
+      }
+
+      .actions-group {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .btn-primary {
+        display: inline-block;
+        width: auto;
+      }
+
+      .link-receipts {
+        text-align: left;
+      }
+
+      .caption-updated {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div class="brand-name">Domi-fy</div>
+      <div class="landlord-name">Adeyemi Properties</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Portfolio overview</h1>
+
+    <section class="summary-grid" aria-label="Financial Summary">
+      <div class="card">
+        <div class="card-label">Expected this year</div>
+        <div class="card-value">₦5,500,000</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Collected</div>
+        <div class="card-value">₦1,800,000</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Outstanding</div>
+        <div class="card-value">₦3,700,000</div>
+      </div>
+    </section>
+
+    <section aria-label="Units list">
+      <h2 class="section-title">Units</h2>
+      <div class="units-list">
+        <div class="unit-row">
+          <div class="unit-info">
+            <div class="unit-name">Ikeja, Flat 2A</div>
+            <div class="unit-tenant">Mrs Okafor</div>
+          </div>
+          <div class="unit-financials">
+            <div class="unit-amount">₦1,800,000</div>
+            <span class="status-chip status-paid">Paid</span>
+          </div>
+        </div>
+
+        <div class="unit-row">
+          <div class="unit-info">
+            <div class="unit-name">Yaba, Flat 5</div>
+            <div class="unit-tenant">Mr Bello</div>
+          </div>
+          <div class="unit-financials">
+            <div class="unit-amount">₦2,200,000</div>
+            <span class="status-chip status-due">Due in 12 days</span>
+          </div>
+        </div>
+
+        <div class="unit-row">
+          <div class="unit-info">
+            <div class="unit-name">Surulere, Flat 1</div>
+            <div class="unit-tenant">Ms Eze</div>
+          </div>
+          <div class="unit-financials">
+            <div class="unit-amount">₦1,500,000</div>
+            <span class="status-chip status-overdue">Overdue 9 days</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions-group">
+      <button type="button" class="btn-primary">Invite tenant</button>
+      <a href="#" class="link-receipts">View receipts</a>
+    </div>
+
+    <p class="caption-updated">Last updated 31 October 2026</p>
+  </main>
+</body>
+</html>
+
