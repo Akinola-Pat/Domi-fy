@@ -1,0 +1,254 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  LANDLORD
+  TENANT
+}
+
+enum UnitStatus {
+  VACANT
+  OCCUPIED
+  MAINTENANCE
+}
+
+enum LeaseStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  TERMINATED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESSFUL
+  FAILED
+  REFUNDED
+}
+
+enum RepairStatus {
+  OPEN
+  INVESTIGATION_ONGOING
+  IN_PROGRESS
+  SORTED
+}
+
+model User {
+  id               String          @id @default(uuid())
+  email            String          @unique
+  passwordHash     String
+  role             UserRole
+  fullName         String
+  isEmailVerified  Boolean         @default(false)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  properties       Property[]      @relation("LandlordProperties")
+  leasesAsTenant   Lease[]         @relation("TenantLeases")
+  repairRequests   RepairRequest[] @relation("TenantRepairs")
+  sessions         Session[]
+  auditEvents      AuditEvent[]
+  storedFiles      StoredFile[]
+
+  @@index([email])
+}
+
+model Session {
+  id         String    @id @default(uuid())
+  userId     String
+  tokenHash  String    @unique
+  expiresAt  DateTime
+  createdAt  DateTime  @default(now())
+  revokedAt  DateTime?
+
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+}
+
+model Property {
+  id                String       @id @default(uuid())
+  landlordId        String
+  propertyName      String
+  addressLine1      String
+  addressLine2      String?
+  city              String
+  state             String
+  country           String       @default("Nigeria")
+  postalCode        String?
+  jurisdictionState String       @default("Lagos")
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  landlord          User         @relation("LandlordProperties", fields: [landlordId], references: [id], onDelete: Restrict)
+  units             Unit[]
+
+  @@index([landlordId])
+}
+
+model Unit {
+  id             String          @id @default(uuid())
+  propertyId     String
+  unitLabel      String
+  unitType       String
+  description    String?
+  status         UnitStatus      @default(VACANT)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  property       Property        @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  leases         Lease[]
+  repairRequests RepairRequest[]
+
+  @@index([propertyId])
+}
+
+model Lease {
+  id                 String           @id @default(uuid())
+  unitId             String
+  tenantId           String
+  rentAmountKobo     BigInt
+  currency           String           @default("NGN")
+  startDate          DateTime
+  endDate            DateTime
+  dueDate            DateTime
+  leaseStatus        LeaseStatus      @default(PENDING)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  unit               Unit             @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  tenant             User             @relation("TenantLeases", fields: [tenantId], references: [id], onDelete: Restrict)
+  guarantors         Guarantor[]
+  payments           Payment[]
+  paymentAttempts    PaymentAttempt[]
+
+  @@index([unitId])
+  @@index([tenantId])
+  @@index([dueDate])
+}
+
+model Guarantor {
+  id           String    @id @default(uuid())
+  leaseId      String
+  fullName     String
+  phone        String
+  address      String
+  relationship String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  lease        Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
+
+  @@index([leaseId])
+}
+
+model Payment {
+  id                     String        @id @default(uuid())
+  leaseId                String
+  grossAmountKobo        BigInt
+  platformFeeKobo        BigInt
+  landlordAllocationKobo BigInt
+  currency               String        @default("NGN")
+  paymentStatus          PaymentStatus @default(PENDING)
+  provider               String        @default("PAYSTACK")
+  providerReference      String        @unique
+  receiptNumber          Int?
+  createdAt              DateTime      @default(now())
+
+  lease                  Lease         @relation(fields: [leaseId], references: [id], onDelete: Restrict)
+
+  @@index([leaseId])
+  @@index([providerReference])
+  @@index([receiptNumber])
+}
+
+model PaymentAttempt {
+  id                String    @id @default(uuid())
+  leaseId           String
+  amountKobo        BigInt
+  providerReference String?
+  status            String
+  failureReason     String?
+  createdAt         DateTime  @default(now())
+
+  lease             Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
+
+  @@index([leaseId])
+}
+
+model RepairRequest {
+  id          String       @id @default(uuid())
+  unitId      String
+  tenantId    String
+  description String
+  status      RepairStatus @default(OPEN)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  unit        Unit         @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  tenant      User         @relation("TenantRepairs", fields: [tenantId], references: [id], onDelete: Restrict)
+
+  @@index([unitId])
+  @@index([tenantId])
+}
+
+model StoredFile {
+  id               String   @id @default(uuid())
+  objectKey        String   @unique
+  bucketName       String
+  originalFilename String
+  mimeType         String
+  sizeBytes        BigInt
+  uploadedById     String
+  createdAt        DateTime @default(now())
+
+  uploader         User     @relation(fields: [uploadedById], references: [id], onDelete: Restrict)
+
+  @@index([uploadedById])
+}
+
+/// LeaseChunk is a mandatory placeholder required by the assessment specification.
+/// Its future purpose is intentionally undefined in the initial MVP slice.
+/// Do not add embeddings, chunking logic, instalment relationships, or speculative fields.
+model LeaseChunk {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Enquiry {
+  id          String   @id @default(uuid())
+  fullName    String
+  email       String
+  phoneNumber String?
+  message     String
+  createdAt   DateTime @default(now())
+
+  @@index([email])
+}
+
+model AuditEvent {
+  id         String   @id @default(uuid())
+  actorId    String?
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([action])
+  @@index([entityType, entityId])
+}
+

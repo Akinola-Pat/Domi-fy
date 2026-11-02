@@ -1,0 +1,61 @@
+@import "../../task-01-design-system/css/tokens.css";
+
+/* -----------------------------------------------------------------------------
+ * Application Scaffold Global Styles
+ * Adheres strictly to Domi-fy Design System Tokens
+ * -------------------------------------------------------------------------- */
+
+:root {
+  /* Spacing Scale (Rule 5 - in rem) */
+  --space-2xs: 0.125rem;    /* 2px */
+  --space-xs: 0.25rem;      /* 4px */
+  --space-sm: 0.5rem;       /* 8px */
+  --space-md: 0.75rem;      /* 12px */
+  --space-lg: 1rem;         /* 16px */
+  --space-xl: 1.25rem;      /* 20px */
+  --space-2xl: 1.5rem;      /* 24px */
+  --space-3xl: 2rem;        /* 32px */
+  --space-4xl: 2.5rem;      /* 40px */
+  --space-max-width: 65rem; /* 1040px max content width */
+
+  /* Corner Radii Scale (in rem) */
+  --radius-xs: 0.125rem;    /* 2px */
+  --radius-sm: 0.25rem;     /* 4px */
+  --radius-md: 0.5rem;      /* 8px */
+  --radius-pill: 99rem;     /* pill buttons / chips */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-surface-container);
+  color: var(--color-on-surface);
+  font-family: var(--font-family-base);
+  font-size: var(--type-b1-size);
+  line-height: var(--type-b1-line);
+  font-weight: var(--type-b1-weight);
+  letter-spacing: var(--type-b1-spacing);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover, a:focus-visible {
+  text-decoration: underline;
+  color: var(--color-on-primary-container);
+}
+
+button {
+  font-family: var(--font-family-base);
+  cursor: pointer;
+}
+
